@@ -9,7 +9,7 @@ or to specify a grid size
 ```
 conway <size>
 ```
-The default grid size is 20x20 since that will fit in the default terminal size. I think it looks best if you resize the terminal to fit a 50x50 grid. That would be a resizing of 100x50 of the terminal.
+The default grid size is 20x20 since that will fit in the default terminal size. I think it looks best if you resize the terminal to fit a 50x50 grid (which would be called with `conway 50`). That would be a resizing of 100x50 of the terminal.
 
 ## Installation
 ```
