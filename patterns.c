@@ -12,12 +12,14 @@ struct pattern patterns[] = {
 	{"blinker", blinker},
 };
 
+// return the number of patterns in the struct. for use with looping through the list
 size_t pattern_amt() {return sizeof (patterns)/sizeof (struct pattern);}
 
 /*******************************************************/
 /*	PATTERNS START									   */
 /*******************************************************/
 
+// place living cells in random places in a starting grid
 void random_pattern(int **grid, int size)
 {
     int hits, n1, n2;
@@ -72,6 +74,9 @@ void blinker(int **g, int size)
 /*	PATTERNS END									   */
 /*******************************************************/
 
+
+
+// check if a pattern is in the list of patterns
 int pattern_check(char *pattern, int **grid, int size)
 {
 	size_t i, len;
