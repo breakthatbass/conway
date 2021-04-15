@@ -10,6 +10,7 @@ struct pattern patterns[] = {
     {"random", random_pattern},
     {"glider", glider},
 	{"blinker", blinker},
+	{"pulsar", pulsar},
 };
 
 // return the number of patterns in the struct. for use with looping through the list
@@ -68,6 +69,96 @@ void blinker(int **g, int size)
 	g[mid][mid] = 1;
 	g[mid][mid-1] = 1;
 	g[mid][mid+1] = 1;
+}
+
+
+void pulsar(int **g, int size)
+{
+	/******************************
+	*-7-6-5-4-3-2-1 0+1+2+3+4+5+6+7 
+	* . . . . . . . . . . . . . . . -7
+	* . . . # # # . . . # # # . . . -6
+	* . . . . . . . . . . . . . . . -5
+	* . # . . . . # . # . . . . # . -4
+	* . # . . . . # . # . . . . # . -3
+	* . # . . . . # . # . . . . # . -2
+	* . . . # # # . . . # # # . . . -1
+	* . . . . . . . 0 . . . . . . .  0
+	* . . . # # # . . . # # # . . . +1
+	* . # . . . . # . # . . . . # . +2
+	* . # . . . . # . # . . . . # . +3
+	* . # . . . . # . # . . . . # . +4
+	* . . . . . . . . . . . . . . . +5
+	* . . . # # # . . . # # # . . . +6
+	* . . . . . . . . . . . . . . . +7
+	*-7-6-5-4-3-2-1 0+1+2+3+4+5+6+7  
+	*******************************/
+
+	int mid = size/2;
+
+	// top half
+	g[mid-6][mid-4] = 1;
+	g[mid-6][mid-3] = 1;
+	g[mid-6][mid-2] = 1;
+
+	g[mid-6][mid+4] = 1;
+	g[mid-6][mid+3] = 1;
+	g[mid-6][mid+2] = 1;
+
+	g[mid-4][mid-6] = 1;
+	g[mid-4][mid-1] = 1;
+	g[mid-4][mid+6] = 1;
+	g[mid-4][mid+1] = 1;
+	
+	g[mid-3][mid-6] = 1;
+	g[mid-3][mid-1] = 1;
+	g[mid-3][mid+6] = 1;
+	g[mid-3][mid+1] = 1;
+
+	g[mid-2][mid-6] = 1;
+	g[mid-2][mid-1] = 1;
+	g[mid-2][mid+6] = 1;
+	g[mid-2][mid+1] = 1;
+
+	g[mid-1][mid-4] = 1;
+	g[mid-1][mid-3] = 1;
+	g[mid-1][mid-2] = 1;
+
+	g[mid-1][mid+4] = 1;
+	g[mid-1][mid+3] = 1;
+	g[mid-1][mid+2] = 1;
+
+	// bottom half
+	g[mid+6][mid-4] = 1;
+	g[mid+6][mid-3] = 1;
+	g[mid+6][mid-2] = 1;
+
+	g[mid+6][mid+4] = 1;
+	g[mid+6][mid+3] = 1;
+	g[mid+6][mid+2] = 1;
+
+	g[mid+4][mid-6] = 1;
+	g[mid+4][mid-1] = 1;
+	g[mid+4][mid+6] = 1;
+	g[mid+4][mid+1] = 1;
+	
+	g[mid+3][mid-6] = 1;
+	g[mid+3][mid-1] = 1;
+	g[mid+3][mid+6] = 1;
+	g[mid+3][mid+1] = 1;
+
+	g[mid+2][mid-6] = 1;
+	g[mid+2][mid-1] = 1;
+	g[mid+2][mid+6] = 1;
+	g[mid+2][mid+1] = 1;
+
+	g[mid+1][mid-4] = 1;
+	g[mid+1][mid-3] = 1;
+	g[mid+1][mid-2] = 1;
+
+	g[mid+1][mid+4] = 1;
+	g[mid+1][mid+3] = 1;
+	g[mid+1][mid+2] = 1;
 }
 
 /*******************************************************/

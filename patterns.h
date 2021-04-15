@@ -34,4 +34,6 @@ void glider(int **g, int size);
 
 void blinker(int **g, int size);
 
+void pulsar(int **g, int size);
+
 #endif
