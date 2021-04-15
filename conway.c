@@ -1,10 +1,11 @@
 #include "grid.h"
 #include "conway.h"
 
-#define MAX 900 // max amount of recursion
+#define MAX 900 	// max amount of recursion
 static int counter = 0;
 
-
+// examine the eight surrounding cells of a certain cell
+// return the number of living cells found
 static int find_neighbors(int **g, int i, int j)
 {
 	int count = 0;
@@ -19,7 +20,8 @@ static int find_neighbors(int **g, int i, int j)
 	return count;
 }
 
-// main conway algorithm
+
+// main conway algorithm (recursive)
 void life(int **g, int size)
 {
 	int i, j, n;

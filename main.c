@@ -65,6 +65,7 @@ int main(int argc, char **argv)
     grid = init_grid(size);
 
     if (p) {
+        // pattern has been supplied. check if it is in the list of available patterns
         if (pattern_check(pattern, grid, size) == 0) {
             fprintf(stderr, "%s: not a viable pattern\n\n", pattern);
             print_usage();

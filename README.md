@@ -85,7 +85,7 @@ Add to the list in the patterns struct.
 struct pattern patterns[] = {
     {"random", random_pattern},
     {"glider", glider},
-	{"blinker", blinker},
+    {"blinker", blinker},
 };
 ```
 Put the name of the pattern on the left and the function name on the right in a new set of brackets.
