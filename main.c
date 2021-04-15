@@ -24,13 +24,14 @@ void print_usage(void)
     exit(EXIT_SUCCESS);
 }
 
+
 int main(int argc, char **argv)
 {
     int opt;
     int **grid;
     char pattern[PBUF];
-    int p = 0; // flag to know if a pattern has been called
-    int size = 20;
+    int p = 0;      // flag to know if a pattern has been called
+    int size = 20;  // default grid size 20x20
 
     // if no args, we default 20x20 grid with random pattern
     if (argc == 1) {
