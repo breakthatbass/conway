@@ -53,7 +53,7 @@ Right now there are only three available starting patterns built into this progr
 [other pattern examples](https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life#Examples_of_patterns) that i'll eventually add.
 
 
-## Adding your more start patterns
+## Adding more starting patterns
 The program is built to easily add more patterns and without having to change any existing code.  
 Everything is done in the [`patterns.c`](https://github.com/breakthatbass/conway/blob/main/patterns.c) file.  
 
