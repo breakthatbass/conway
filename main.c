@@ -4,7 +4,25 @@
 #include "patterns.h"
 #include "conway.h"
 
-#define PBUF 45
+
+void print_usage(void)
+{
+    size_t i, len;
+    char **pattern_list;
+
+    len = pattern_amt();
+    pattern_list = get_pattern_list();
+
+    printf("usage: conway [-s size, -p pattern]\n");
+    printf("  available patterns:\n");
+
+    for (i = 0; i < len; i++) {
+        printf("\t- %s\n", pattern_list[i]);
+        free(pattern_list[i]);
+    }
+    free(pattern_list);
+    exit(EXIT_SUCCESS);
+}
 
 int main(int argc, char **argv)
 {
@@ -24,7 +42,7 @@ int main(int argc, char **argv)
     }
 
     
-    while ((opt = getopt(argc, argv, "s:p:")) != -1) {
+    while ((opt = getopt(argc, argv, "s:p:u")) != -1) {
         switch(opt) {
         case 's':
             size = atoi(optarg);
@@ -34,8 +52,11 @@ int main(int argc, char **argv)
             p = 1;
             strcpy(pattern, optarg);
             break;
+        case 'u':
+            print_usage();
+            break;
         default:
-            // print_usage();
+            print_usage();
             return 1;
         }
     }
@@ -44,7 +65,8 @@ int main(int argc, char **argv)
 
     if (p) {
         if (pattern_check(pattern, grid, size) == 0) {
-            fprintf(stderr, "%s: not a viable pattern\n", pattern);
+            fprintf(stderr, "%s: not a viable pattern\n\n", pattern);
+            print_usage();
             exit(EXIT_FAILURE);
         }
     // if no pattern was selected we do random by default
