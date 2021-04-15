@@ -1,11 +1,17 @@
-#include "patterns.h"
+#include <time.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <assert.h>
 
+#include "patterns.h"
 
 struct pattern patterns[] = {
     {"random", random_pattern},
     {"glider", glider},
-	{"blinker", blinker}
+	{"blinker", blinker},
 };
+
 size_t pattern_amt() {return sizeof (patterns)/sizeof (struct pattern);}
 
 void random_pattern(int **grid, int size)
@@ -72,4 +78,26 @@ int pattern_check(char *pattern, int **grid, int size)
         }
 	}
 	return 0;
+}
+
+
+// get the current list of patterns and place them in an array
+// user must free
+char **get_pattern_list(void)
+{
+	size_t i, len;
+	char **pattern_list;
+
+	len = pattern_amt();
+	pattern_list = calloc(len+1, sizeof(char*));
+	for (i = 0; i < len; i++) {
+		pattern_list[i] = calloc(PBUF, sizeof(char));
+		assert(pattern_list[i]);
+	}
+	assert(pattern_list);
+
+	for (i = 0; i < len; i++) {
+		strcpy(pattern_list[i], patterns[i].pattern_name);
+	}
+	return pattern_list;
 }
