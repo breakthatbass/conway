@@ -92,7 +92,7 @@ int pattern_check(char *pattern, int **grid, int size)
 }
 
 
-// get the current list of patterns and place them in an array
+// get the current list of pattern names and place them in an array
 // user must free
 char **get_pattern_list(void)
 {
