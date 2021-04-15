@@ -2,7 +2,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <assert.h>
 
 #include "patterns.h"
 
@@ -192,13 +191,16 @@ char **get_pattern_list(void)
 
 	len = pattern_amt();
 	pattern_list = calloc(len+1, sizeof(char*));
+	if (pattern_list == NULL) {
+		fprintf(stderr, "get_pattern_list: calloc failed\n");
+		exit(EXIT_FAILURE);
+	}
 	for (i = 0; i < len; i++) {
 		pattern_list[i] = calloc(PBUF, sizeof(char));
-		assert(pattern_list[i]);
-	}
-	assert(pattern_list);
-
-	for (i = 0; i < len; i++) {
+		if (pattern_list[i] == NULL) {
+			fprintf(stderr, "get_pattern_list: calloc failed\n");
+			exit(EXIT_FAILURE);
+		}
 		strcpy(pattern_list[i], patterns[i].pattern_name);
 	}
 	return pattern_list;
