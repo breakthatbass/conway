@@ -14,6 +14,10 @@ struct pattern patterns[] = {
 
 size_t pattern_amt() {return sizeof (patterns)/sizeof (struct pattern);}
 
+/*******************************************************/
+/*	PATTERNS START									   */
+/*******************************************************/
+
 void random_pattern(int **grid, int size)
 {
     int hits, n1, n2;
@@ -64,7 +68,9 @@ void blinker(int **g, int size)
 	g[mid][mid+1] = 1;
 }
 
-
+/*******************************************************/
+/*	PATTERNS END									   */
+/*******************************************************/
 
 int pattern_check(char *pattern, int **grid, int size)
 {
