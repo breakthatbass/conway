@@ -1,5 +1,13 @@
 #include "patterns.h"
 
+
+struct pattern patterns[] = {
+    {"random", random_pattern},
+    {"glider", glider},
+	{"blinker", blinker}
+};
+size_t pattern_amt() {return sizeof (patterns)/sizeof (struct pattern);}
+
 void random_pattern(int **grid, int size)
 {
     int hits, n1, n2;
@@ -50,3 +58,18 @@ void blinker(int **g, int size)
 	g[mid][mid+1] = 1;
 }
 
+
+
+int pattern_check(char *pattern, int **grid, int size)
+{
+	size_t i, len;
+
+	len = pattern_amt();
+	for (i = 0; i < len; i++) {
+		if (strcmp(pattern, patterns[i].pattern_name) == 0) {
+            patterns[i].f(grid, size);
+            return 1;
+        }
+	}
+	return 0;
+}
