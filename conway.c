@@ -50,7 +50,7 @@ void life(int **g, int size)
 		return;
 	}
 	free_grid(g, size);
-	usleep(20000);
+	usleep(50000);
 	print_grid(tmp, size);
 	life(tmp, size);
 }
