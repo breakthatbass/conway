@@ -2,6 +2,8 @@ CC=gcc
 CFLAGS=-fsanitize=address -Wall -g
 FILES=main.c grid.c patterns.c conway.c
 BIN=conway
+# get the os
+UNAME_S := $(shell uname)
 
 all: $(BIN)
 
@@ -10,7 +12,11 @@ $(BIN): $(FILES)
 
 install: $(BIN)
 	mkdir -p /usr/local/bin
+ifeq ($(UNAME_S), Linux)
+	sudo cp $< /usr/local/bin/$(BIN)
+else
 	cp $< /usr/local/bin/$(BIN)
+endif
 
 uninstall: $(BIN)
 	rm /usr/local/bin/$(BIN)
