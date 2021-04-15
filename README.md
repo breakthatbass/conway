@@ -39,11 +39,16 @@ The default can be run simply with:
 ```
 conway      # run with defaults
 ```
+#### Getting usage and list of patterns in the program
+```
+conway -u
+```
 ## Available start patterns
 Right now there are only three available starting patterns built into this program:
 - random
 - glider
 - blinker
+- pulsar
 
 [other pattern examples](https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life#Examples_of_patterns) that i'll eventually add.
 
