@@ -31,9 +31,9 @@ int main(int argc, char **argv)
     int **grid;
     char pattern[PBUF];
     int p = 0;      // flag to know if a pattern has been called
-    int size = 20;  // default grid size 20x20
+    int size = 24;  // default grid size 24x24
 
-    // if no args, we default 20x20 grid with random pattern
+    // if no args, go with default  grid size with random pattern
     if (argc == 1) {
         grid = init_grid(size);
         random_pattern(grid, size);
