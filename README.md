@@ -31,9 +31,9 @@ make uninstall
 
 ## Usage
 ```
-conway [-s <size> -p <pattern>]
+conway [-s <size> -p <pattern>]		# size is a single integer like 50
 ```
-The default size is a grid of 20 cells high and 20 cells wide.  
+The default size is a grid of 24 cells high and 24 cells wide.  
 The default pattern is just a random placement of living cells at the start.  
 The default can be run simply with:
 ```
@@ -44,7 +44,7 @@ conway      # run with defaults
 conway -u
 ```
 ## Available start patterns
-Right now there are only three available starting patterns built into this program:
+Right now there are only four available starting patterns built into this program:
 - random
 - glider
 - blinker
@@ -82,9 +82,9 @@ void glider(int **g, int size)
 	g[mid][mid-1] = 1;
 }
 ```
-All pattern function need to take two arguments: the grid and the size which are handled in the `main` function.  
+All pattern functions need to take two arguments: the grid and the size which are handled in the `main` function.  
 Keep the `int mid = size/2` as that will place the pattern in the middle of the grid.  
-Build your grid with 1s as the grid is filled with zeros denoting dead cells.  
+Build your grid with 1s as the grid is pre-filled with zeros denoting dead cells.  
 
 #### **Step 2:**
 Add to the list in the patterns struct.
