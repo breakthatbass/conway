@@ -1,5 +1,15 @@
 #include "grid.h"
 
+
+// get current height of terminal to use for grid sizing
+int get_term_height()
+{
+	struct winsize w;
+	ioctl(STDOUT_FILENO, TIOCGWINSZ, &w);
+	return w.ws_row;
+}
+
+
 // allocate space for a grid based on size
 int **init_grid(int size)
 {
