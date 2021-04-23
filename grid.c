@@ -1,3 +1,6 @@
+#include <sys/ioctl.h>
+#include <unistd.h>
+
 #include "grid.h"
 
 
