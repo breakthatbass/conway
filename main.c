@@ -31,7 +31,7 @@ int main(int argc, char **argv)
     int **grid;
     char pattern[PBUF];
     int p = 0;      // flag to know if a pattern has been called
-    int size = 24;  // default grid size 24x24
+    int size = get_term_height();  // get current terminal height to use for grid
 
     // if no args, go with default  grid size with random pattern
     if (argc == 1) {
@@ -43,11 +43,8 @@ int main(int argc, char **argv)
     }
 
     
-    while ((opt = getopt(argc, argv, "s:p:u")) != -1) {
+    while ((opt = getopt(argc, argv, "p:u")) != -1) {
         switch(opt) {
-        case 's':
-            size = atoi(optarg);
-            break;
         case 'p':
             // a pattern has been selected
             p = 1;
