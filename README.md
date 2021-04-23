@@ -31,14 +31,15 @@ make uninstall
 
 ## Usage
 ```
-conway [-s <size> -p <pattern>]		# size is a single integer like 50
+conway [-p <pattern>]
 ```
-The default size is a grid of 24 cells high and 24 cells wide.  
-The default pattern is just a random placement of living cells at the start.  
-The default can be run simply with:
+The size flag (`-s`) has been removed. The program now automatically fits the grid to the current terminal size.  
+Provide a pattern with `-p` or simply run 
 ```
-conway      # run with defaults
+conway
 ```
+for a random placement of living cells at the start.  
+
 #### Getting usage and list of patterns in the program
 ```
 conway -u
@@ -107,4 +108,5 @@ Contributions are very much welcomed.
 If you'd like to contribute a pattern follow the steps above for adding patterns. If you find bugs, you can raise an issue or fix it too.
 
 ## TODO
-1. add more starting patterns
+1. add feature to read from RLE files
+2. add more starting patterns
