@@ -1,7 +1,7 @@
 # Conway's Game of Life
 This is a visualization program of John Conway's [game of life](https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life) algorithm. It's one of my favorite algorthms and it's super cool to watch it in action. I chose to do do mine recursively.
 
-<img src="conway.gif">
+<img src="demo.gif">
 
 The algorithm is a [celluar automation](https://en.wikipedia.org/wiki/Cellular_automaton) where each cell in the grid either comes to "life" or "dies" or stays as it is based on the status of the eight surrounding cells. 
 
@@ -31,20 +31,21 @@ make uninstall
 
 ## Usage
 ```
-conway [-s <size> -p <pattern>]
+conway [-p <pattern>]
 ```
-The default size is a grid of 20 cells high and 20 cells wide.  
-The default pattern is just a random placement of living cells at the start.  
-The default can be run simply with:
+The size flag (`-s`) has been removed. The program now automatically fits the grid to the current terminal size.  
+Provide a pattern with `-p` or simply run 
 ```
-conway      # run with defaults
+conway
 ```
+for a random placement of living cells at the start.  
+
 #### Getting usage and list of patterns in the program
 ```
 conway -u
 ```
 ## Available start patterns
-Right now there are only three available starting patterns built into this program:
+Right now there are only four available starting patterns built into this program:
 - random
 - glider
 - blinker
@@ -82,9 +83,9 @@ void glider(int **g, int size)
 	g[mid][mid-1] = 1;
 }
 ```
-All pattern function need to take two arguments: the grid and the size which are handled in the `main` function.  
+All pattern functions need to take two arguments: the grid and the size which are handled in the `main` function.  
 Keep the `int mid = size/2` as that will place the pattern in the middle of the grid.  
-Build your grid with 1s as the grid is filled with zeros denoting dead cells.  
+Build your grid with 1s as the grid is pre-filled with zeros denoting dead cells.  
 
 #### **Step 2:**
 Add to the list in the patterns struct.
@@ -107,4 +108,5 @@ Contributions are very much welcomed.
 If you'd like to contribute a pattern follow the steps above for adding patterns. If you find bugs, you can raise an issue or fix it too.
 
 ## TODO
-1. add more starting patterns
+1. add feature to read from RLE files
+2. add more starting patterns
