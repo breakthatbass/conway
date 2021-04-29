@@ -98,9 +98,6 @@ static char *rle_decode(char *s)
 }
 
 
-// keep track of current row while loading pattern into grid
-static int row = 2;
-
 /*
  * load_grid:
  *
@@ -108,12 +105,13 @@ static int row = 2;
  * it breaks the string into tokens based on '$', decompresses it, and loads it
  * into the grid.
  */
-void load_grid(int **g, char *pattern)
+void load_grid(int **g, char *pattern, int size)
 {
     char *line;
     char *p;
     int col = 1; // add an edge buffer
-	int term_size;
+
+    int row = size/3;
 
     line = strtok(pattern, "$");
     while (line != NULL) {
@@ -130,3 +128,35 @@ void load_grid(int **g, char *pattern)
 }
 
 
+/*
+* rle_string:
+*
+* read an RLE file into a string and return it
+*/
+char *rle_string(char *file)
+{
+    FILE *fp;
+    static char buf[1024];
+    char c;
+    int i;
+
+    // make sure file is an .rle file
+    if (strstr(file, ".rle") == NULL) {
+        fprintf(stderr, "conway: file must be an RLE formatted file\n");
+        exit(EXIT_FAILURE);
+    }
+
+    fp = fopen(file, "r");
+    if (fp == NULL) {
+        fprintf(stderr, "conway: unable to open file: %s\n", file);
+        exit(EXIT_FAILURE);
+    }
+
+    i = 0;
+    while ((c = fgetc(fp)) != EOF)
+        buf[i++] = c;
+    buf[i] = '\0';
+    fclose(fp);
+
+    return buf;
+}
