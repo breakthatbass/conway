@@ -19,11 +19,15 @@ void rle_parse(char *s, struct rle_file *f)
         } else if (*s == '\n') {  // done with comment line
             IGNORE = 0;
         } else if (*s == 'x' && !IGNORE) {
+			// get size
             strcpy(buf, strtok(s, "\n"));
             sscanf(buf, "x = %d, y = %d", &h, &w);
+			// conway uses a square grid so we take the largest of h and w
             if (h > w) f->size = h;
             else f->size = w;
             memset(buf, 0, 1024);
+
+			// copy the rle directions
             strcpy(buf, strtok(NULL, "!"));
             f->rle = malloc(sizeof(char)*strlen(buf)+1);
             assert(f->rle);
@@ -32,3 +36,88 @@ void rle_parse(char *s, struct rle_file *f)
         s++;
     }
 }
+
+
+/*
+ * rle_decode:
+ *
+ * decpompress one line of an encoded string
+ * returns the decompressed string
+ * 
+ * note: user must free returned string
+ *
+ * example: 2bo3ob
+ * return: bboooob
+ */
+static char *rle_decode(char *s)
+{
+    int count, i, j;
+    char prev;
+    char *decode;
+
+    decode = malloc(sizeof(char)*strlen(s)*10);
+    assert(decode);
+
+    count = 1;
+    j = 0;
+    while (*s) {
+      
+        if (*s == 'b') {
+            for (i = 0; i < count; i++) 
+                decode[j++] = 'b';
+            count = 1;
+        }
+        else if (*s == 'o') {
+            for (i = 0; i < count; i++)
+                decode[j++] = 'o';
+            count = 1;
+        } 
+        else if (isdigit(*s)) {
+          
+            if (isdigit(prev)) {
+
+                count = (count*10)+(*s-'0');
+            }
+            else count = *s-'0';
+
+        }
+        prev = *s;
+        s++;
+    }
+    decode[j] = '\0';
+    return decode;
+}
+
+
+// keep track of current row while loading pattern into grid
+static int row = 0;
+
+/*
+ * load_grid:
+ *
+ * takes the grid and the entire pattern string containing multiple lines
+ * it breaks the string into tokens based on '$', decompresses it, and loads it
+ * into the grid.
+ */
+void load_grid(int **g, char *pattern)
+{
+    char *line;
+    char *p;
+
+    int col = 0;
+
+    line = strtok(pattern, "$");
+    while (line != NULL) {
+        col = 0;
+        p = rle_decode(line);
+        for (int i = 0; i < strlen(p); i++) {
+            if (p[i] == 'o') g[row][col++] = 1;
+            else col++;
+        }
+        row++;
+        free(p);
+        line = strtok(NULL, "$");
+    }
+}
+
+
