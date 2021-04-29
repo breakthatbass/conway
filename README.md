@@ -31,19 +31,21 @@ make uninstall
 
 ## Usage
 ```
-conway [-p <pattern>]
-```
-The size flag (`-s`) has been removed. The program now automatically fits the grid to the current terminal size.  
-Provide a pattern with `-p` or simply run 
-```
-conway
-```
-for a random placement of living cells at the start.  
+conway [ -u, -p <pattern>, -f <pattern_file.rle> ]
 
-#### Getting usage and list of patterns in the program
+optional arguments:
+  -p		use one of the built in patterns
+  -f		use a run length encoded pattern file
+  -u		show usage
 ```
-conway -u
-```
+Run `conway` with no flags or arguments and it will do a random placement of living cells.
+## Using RLE pattern files
+You can provide any RLE pattern file for it to read and it will do its best to read in the pattern. I haven't tested *every* pattern, but it seems to work okay.
+
+[Here's a pattern list](https://www.conwaylife.com/wiki/Category:Patterns) with links to pattern sheets. 
+
+use a pattern sheet with: `conway -f path/to/file.rle`
+
 ## Available start patterns
 Right now there are only four available starting patterns built into this program:
 - random
@@ -51,7 +53,9 @@ Right now there are only four available starting patterns built into this progra
 - blinker
 - pulsar
 
-[other pattern examples](https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life#Examples_of_patterns) that i'll eventually add.
+[other pattern examples](https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life#Examples_of_patterns) that i'll eventually (maybe, but probably not) add.
+
+use a built in pattern with: `conway -p pulsar`
 
 
 ## Adding more starting patterns
@@ -108,5 +112,5 @@ Contributions are very much welcomed.
 If you'd like to contribute a pattern follow the steps above for adding patterns. If you find bugs, you can raise an issue or fix it too.
 
 ## TODO
-1. add feature to read from RLE files
-2. add more starting patterns
+1. add tests for RLE file reader/parser functions
+2. remove asserts and do proper error checks
