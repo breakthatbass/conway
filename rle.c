@@ -1,4 +1,12 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <assert.h>
+#include <ctype.h>
+
 #include "rle.h"
+#include "grid.h"
+
 
 /*
 * rle_parse:
@@ -86,7 +94,7 @@ static char *rle_decode(char *s)
 
 
 // keep track of current row while loading pattern into grid
-static int row = 0;
+static int row = 2;
 
 /*
  * load_grid:
@@ -99,11 +107,16 @@ void load_grid(int **g, char *pattern)
 {
     char *line;
     char *p;
-    int col = 0;
+    int col = 1; // add an edge buffer
+	int term_size;
+
+	//term_size = get_term_height()/3;
+
+	//row += term_size;
 
     line = strtok(pattern, "$");
     while (line != NULL) {
-        col = 0;
+        col = 1;
         p = rle_decode(line);
         for (int i = 0; i < strlen(p); i++) {
             if (p[i] == 'o') g[row][col++] = 1;

@@ -6,7 +6,7 @@
 
 
 // get current height of terminal to use for grid sizing
-int get_term_height()
+int get_term_height();
 
 // allocate space for a grid based on size
 int **init_grid(int size);

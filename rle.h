@@ -1,9 +1,6 @@
 #ifndef __RLE_H__
 #define __RLE_H__
 
-#include <assert.h>
-#include <string.h>
-#include <ctype.h>
 
 struct rle_file {
     int size;
@@ -26,6 +23,6 @@ void rle_parse(char *s, struct rle_file *f);
  * it breaks the string into tokens based on '$', decompresses it, and loads it
  * into the grid.
  */
-void load_grid(int **g, char *pattern)
+void load_grid(int **g, char *pattern);
 
 #endif

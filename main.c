@@ -1,4 +1,5 @@
 #include <getopt.h>
+#include <assert.h>
 
 #include "grid.h"
 #include "patterns.h"
@@ -83,6 +84,7 @@ int main(int argc, char **argv)
         // file
         struct rle_file f;
         char buf[1024];
+		char c;
 
         fp = fopen(pattern, "r");
         assert(fp);
