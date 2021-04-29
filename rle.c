@@ -61,7 +61,6 @@ static char *rle_decode(char *s)
     count = 1;
     j = 0;
     while (*s) {
-      
         if (*s == 'b') {
             for (i = 0; i < count; i++) 
                 decode[j++] = 'b';
@@ -73,13 +72,10 @@ static char *rle_decode(char *s)
             count = 1;
         } 
         else if (isdigit(*s)) {
-          
             if (isdigit(prev)) {
-
                 count = (count*10)+(*s-'0');
             }
             else count = *s-'0';
-
         }
         prev = *s;
         s++;
@@ -103,7 +99,6 @@ void load_grid(int **g, char *pattern)
 {
     char *line;
     char *p;
-
     int col = 0;
 
     line = strtok(pattern, "$");
