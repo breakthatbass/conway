@@ -46,6 +46,8 @@ You can provide any RLE pattern file for it to read and it will do its best to r
 
 use a pattern sheet with: `conway -f path/to/file.rle`
 
+- There are a few pattern sheets provided in the repo.
+
 ## Available start patterns
 Right now there are only four available starting patterns built into this program:
 - random
