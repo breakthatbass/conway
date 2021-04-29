@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <assert.h>
 #include <ctype.h>
 
 #include "rle.h"
@@ -38,7 +37,10 @@ void rle_parse(char *s, struct rle_file *f)
 			// copy the rle directions
             strcpy(buf, strtok(NULL, "!"));
             f->rle = malloc(sizeof(char)*strlen(buf)+1);
-            assert(f->rle);
+            if (f->rle == NULL) {
+                fprintf(stderr, "rle_parse: malloc failed\n");
+                exit(EXIT_FAILURE);
+            }
             strcpy(f->rle, buf);
         }
         s++;
@@ -64,7 +66,10 @@ static char *rle_decode(char *s)
     char *decode;
 
     decode = malloc(sizeof(char)*strlen(s)*10);
-    assert(decode);
+    if (decode == NULL) {
+        fprintf(stderr, "rle_decode: malloc failed\n");
+        exit(EXIT_FAILURE);
+    }
 
     count = 1;
     j = 0;
@@ -109,10 +114,6 @@ void load_grid(int **g, char *pattern)
     char *p;
     int col = 1; // add an edge buffer
 	int term_size;
-
-	//term_size = get_term_height()/3;
-
-	//row += term_size;
 
     line = strtok(pattern, "$");
     while (line != NULL) {
