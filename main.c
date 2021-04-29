@@ -3,6 +3,7 @@
 #include "grid.h"
 #include "patterns.h"
 #include "conway.h"
+#include "rle.h"
 
 
 void print_usage(void)
@@ -27,11 +28,14 @@ void print_usage(void)
 
 int main(int argc, char **argv)
 {
-    int opt;
+    int opt, i;
     int **grid;
     char pattern[PBUF];
     int p = 0;      // flag to know if a pattern has been called
+    int f = 0;      // flag to know if a RLE file format pattern has been provided
     int size = get_term_height();  // get current terminal height to use for grid
+
+    FILE *fp;
 
     // if no args, go with default  grid size with random pattern
     if (argc == 1) {
@@ -43,11 +47,16 @@ int main(int argc, char **argv)
     }
 
     
-    while ((opt = getopt(argc, argv, "p:u")) != -1) {
+    while ((opt = getopt(argc, argv, "p:f:u")) != -1) {
         switch(opt) {
         case 'p':
             // a pattern has been selected
             p = 1;
+            strcpy(pattern, optarg);
+            break;
+        case 'f':
+            // rle file selected
+            f = 1;
             strcpy(pattern, optarg);
             break;
         case 'u':
@@ -69,6 +78,28 @@ int main(int argc, char **argv)
             exit(EXIT_FAILURE);
         }
     // if no pattern was selected we do random by default
+    }
+    else if (f) {
+        // file
+        struct rle_file f;
+        char buf[1024];
+
+        fp = fopen(pattern, "r");
+        assert(fp);
+
+        i = 0;
+        while ((c = fgetc(fp)) != EOF)
+            buf[i++] = c;
+        buf[i] = '\0';
+        fclose(fp);
+
+        rle_parse(buf, &f);
+
+        grid = init_grid(size);
+
+        load_grid(grid, f.rle);
+        free(f.rle);
+
     } else random_pattern(grid, size);
 
     print_grid(grid, size);
