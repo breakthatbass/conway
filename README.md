@@ -1,7 +1,7 @@
 # Conway's Game of Life
-This is a visualization program of John Conway's [game of life](https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life) algorithm. It's one of my favorite algorthms and it's super cool to watch it in action. I chose to do do mine recursively.
+This is a visualization program of John Conway's [game of life](https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life) algorithm that can read from [RLE pattern files](https://www.conwaylife.com/wiki/Run_Length_Encoded).
 
-<img src="demo.gif">
+<img src="demo.gif" style="width:600px;">
 
 The algorithm is a [celluar automation](https://en.wikipedia.org/wiki/Cellular_automaton) where each cell in the grid either comes to "life" or "dies" or stays as it is based on the status of the eight surrounding cells. 
 
@@ -30,89 +30,23 @@ make uninstall
 ```
 
 ## Usage
+For quick usage simply run
 ```
-conway [ -u, -p <pattern>, -f <pattern_file.rle> ]
-
-optional arguments:
-  -p		use one of the built in patterns
-  -f		use a run length encoded pattern file
-  -u		show usage
+conway		# randomly place living cells and size grid according to terminal size
 ```
-Run `conway` with no flags or arguments and it will do a random placement of living cells.
-## Using RLE pattern files
-You can provide any RLE pattern file for it to read and it will do its best to read in the pattern. I haven't tested *every* pattern, but it seems to work okay.
-
-[Here's a pattern list](https://www.conwaylife.com/wiki/Category:Patterns) with links to pattern sheets. 
-
-use a pattern sheet with: `conway -f path/to/file.rle`
-
-- There are a few pattern sheets provided in the repo.
-
-## Available start patterns
-Right now there are only four available starting patterns built into this program:
-- random
-- glider
-- blinker
-- pulsar
-
-[other pattern examples](https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life#Examples_of_patterns) that i'll eventually (maybe, but probably not) add.
-
-use a built in pattern with: `conway -p pulsar`
-
-
-## Adding more starting patterns
-The program is built to easily add more patterns and without having to change any existing code.  
-Everything is done in the [`patterns.c`](https://github.com/breakthatbass/conway/blob/main/patterns.c) file.  
-
-If you'd like to contribute your own patterns, that would be awesome.
-
-#### **Step 1:**
-
-Here's what the glider pattern function looks like and it can be used as a template:
-```c
-void glider(int **g, int size)
-{
-	/************
-	 * . . . . . 
-	 * . . . # .
-	 * . # . # .
-	 * . . # # .
-	 * . . . . .
-	 * *********/
-
-	int mid = size/2;
-
-	g[mid-1][mid+1] = 1;
-	g[mid][mid+1] = 1;
-	g[mid+1][mid+1] = 1;
-	g[mid+1][mid] = 1;
-	g[mid][mid-1] = 1;
-}
 ```
-All pattern functions need to take two arguments: the grid and the size which are handled in the `main` function.  
-Keep the `int mid = size/2` as that will place the pattern in the middle of the grid.  
-Build your grid with 1s as the grid is pre-filled with zeros denoting dead cells.  
+conway [ -u, -p <pattern>, -f <file.rle> ]
 
-#### **Step 2:**
-Add to the list in the patterns struct.
-```c
-struct pattern patterns[] = {
-    {"random", random_pattern},
-    {"glider", glider},
-    {"blinker", blinker},
-};
+  conway -p biltin-in-pattern 		use one of the built in patterns
+  conway -f	path/to/file.rle		use a run length encoded pattern file
+  conway -u							show usage
 ```
-Put the name of the pattern on the left and the function name on the right in a new set of brackets.
+## Patterns
 
-#### **Step 3:**
-Add the function prototype to [`patterns.h`](https://github.com/breakthatbass/conway/blob/main/patterns.h)  
+There are thousands of [Life starting patterns](https://www.conwaylife.com/wiki/Category:Patterns) that are easy to find on the internet. Using the `.rle` file format is the easiest way to read in patterns in this program. If you click the link you'll be able to find `.rle` files of pretty much every pattern out there. This repo also has 3 pattern `.rle` files to try out. 
 
-...And you're good to go. It will automatically be added to the usage display and it will be recognized when used as an argumant with the `-p` flag.
+Using the built-in patterns is an option too. Using the `-u` flag will list the current built-in patterns. And you can easily add your own too, however, this option will probably removed soon since it's easier and simpler to read from pattern files.
 
-## Contributing
-Contributions are very much welcomed.  
-If you'd like to contribute a pattern follow the steps above for adding patterns. If you find bugs, you can raise an issue or fix it too.
-
-## TODO
-1. add tests for RLE file reader/parser functions
-2. remove asserts and do proper error checks
+## ToDo
+- add tests
+- remove built-in patterns and rely on `.rle` files
