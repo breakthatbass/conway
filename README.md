@@ -30,16 +30,17 @@ make uninstall
 ```
 
 ## Usage
-For quick usage simply run
+For quick usage simply run  
 ```
 conway		# randomly place living cells and size grid according to terminal size
 ```
 ```
 conway [ -u, -p <pattern>, -f <file.rle> ]
-
-  conway -p biltin-in-pattern 		use one of the built in patterns
-  conway -f	path/to/file.rle		use a run length encoded pattern file
-  conway -u							show usage
+```
+```
+conway -p built-in-pattern		# use one of the built in patterns
+conway -f path/to/file.rle		# use a run length encoded pattern file
+conway -u						# show usage
 ```
 ## Patterns
 
@@ -50,3 +51,4 @@ Using the built-in patterns is an option too. Using the `-u` flag will list the 
 ## ToDo
 - add tests
 - remove built-in patterns and rely on `.rle` files
+- add feature to read from `stdin` so you can `curl` web hosted files into program.
