@@ -40,7 +40,7 @@ conway [ -u, -p <pattern>, -f <file.rle> ]
 ```
 conway -p built-in-pattern		# use one of the built in patterns
 conway -f path/to/file.rle		# use a run length encoded pattern file
-conway -u						# show usage
+conway -u			# show usage
 ```
 ## Patterns
 
