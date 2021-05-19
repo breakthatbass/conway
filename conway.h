@@ -10,4 +10,7 @@
 // main conway algorithm (recursive)
 void life(int **g, int size);
 
+// place living cells in random places in a starting grid
+void random_pattern(int **grid, int size);
+
 #endif

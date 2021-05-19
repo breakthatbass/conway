@@ -56,3 +56,19 @@ void life(int **g, int size)
 	print_grid(tmp, size);
 	life(tmp, size);
 }
+
+
+// place living cells in random places in a starting grid
+void random_pattern(int **grid, int size)
+{
+    int hits, n1, n2;
+
+    hits = (int)(size*size)*0.6;
+    srand(time(0));
+    for (int i = 0; i < hits; i++) {
+        n1 = rand() % ((size-1) - 0 + 1);
+        n2 = rand() % ((size-1) - 0 + 1);
+
+        grid[n1][n2] = 1;
+    }
+}
