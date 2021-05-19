@@ -6,6 +6,7 @@
 #include "rle.h"
 #include "grid.h"
 
+#define BUF 4096
 
 /*
 * rle_parse:
@@ -16,7 +17,7 @@
 void rle_parse(char *s, struct rle_file *f)
 {
     int h, w;
-    char buf[1024];
+    char buf[BUF];
     int IGNORE = 0;
 
     /*
@@ -116,13 +117,13 @@ void load_grid(int **g, char *pattern, int size)
 {
     char *line;
     char *p;
-    int col = 1; // add an edge buffer
+    int col = size/3; // add an edge buffer
 
     int row = size/3;
 
     line = strtok(pattern, "$");
     while (line != NULL) {
-        col = 1;
+        col = size/3;
         p = rle_decode(line);
         for (int i = 0; i < strlen(p); i++) {
             if (p[i] == 'o') g[row][col++] = 1;
@@ -139,7 +140,7 @@ void load_grid(int **g, char *pattern, int size)
 
 char *rle_string(FILE *fp)
 {
-    static char buf[1024];
+    static char buf[BUF];
     char c;
     int i;
 
