@@ -30,6 +30,6 @@ void load_grid(int **g, char *pattern, int size);
 *
 * read an RLE file into a string and return it
 */
-char *rle_string(char *file);
+char *rle_string(FILE *fp);
 
 #endif

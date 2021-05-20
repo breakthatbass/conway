@@ -6,6 +6,7 @@
 #include "rle.h"
 #include "grid.h"
 
+#define BUF 4096
 
 /*
 * rle_parse:
@@ -16,7 +17,7 @@
 void rle_parse(char *s, struct rle_file *f)
 {
     int h, w;
-    char buf[1024];
+    char buf[BUF];
     int IGNORE = 0;
 
     while (*s) {
@@ -32,7 +33,7 @@ void rle_parse(char *s, struct rle_file *f)
 			// conway uses a square grid so we take the largest of h and w
             if (h > w) f->size = h;
             else f->size = w;
-            memset(buf, 0, 1024);
+            memset(buf, 0, BUF);
 
 			// copy the rle directions
             strcpy(buf, strtok(NULL, "!"));
@@ -118,6 +119,7 @@ void load_grid(int **g, char *pattern, int size)
         col = 1;
         p = rle_decode(line);
         for (int i = 0; i < strlen(p); i++) {
+            if (col >= size) col = 1;
             if (p[i] == 'o') g[row][col++] = 1;
             else col++;
         }
@@ -128,35 +130,18 @@ void load_grid(int **g, char *pattern, int size)
 }
 
 
-/*
-* rle_string:
-*
-* read an RLE file into a string and return it
-*/
-char *rle_string(char *file)
+
+
+char *rle_string(FILE *fp)
 {
-    FILE *fp;
-    static char buf[1024];
+    static char buf[BUF];
     char c;
     int i;
-
-    // make sure file is an .rle file
-    if (strstr(file, ".rle") == NULL) {
-        fprintf(stderr, "conway: file must be an RLE formatted file\n");
-        exit(EXIT_FAILURE);
-    }
-
-    fp = fopen(file, "r");
-    if (fp == NULL) {
-        fprintf(stderr, "conway: unable to open file: %s\n", file);
-        exit(EXIT_FAILURE);
-    }
 
     i = 0;
     while ((c = fgetc(fp)) != EOF)
         buf[i++] = c;
     buf[i] = '\0';
-    fclose(fp);
 
     return buf;
 }

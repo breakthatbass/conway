@@ -1,6 +1,6 @@
 CC=gcc
 CFLAGS=-fsanitize=address -Wall -g
-FILES=main.c grid.c patterns.c conway.c rle.c
+FILES=main.c grid.c conway.c rle.c
 BIN=conway
 # get the os
 UNAME_S := $(shell uname)
