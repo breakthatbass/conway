@@ -1,7 +1,5 @@
 # Conway's Game of Life
-This is a visualization program of John Conway's [game of life](https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life) algorithm that can read from [RLE pattern files](https://www.conwaylife.com/wiki/Run_Length_Encoded).
-
-<img src="demo.gif" style="width:600px;">
+This is a visualization program of John Conway's [game of life](https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life) algorithm that reads from [RLE pattern files](https://www.conwaylife.com/wiki/Run_Length_Encoded).
 
 The algorithm is a [celluar automation](https://en.wikipedia.org/wiki/Cellular_automaton) where each cell in the grid either comes to "life" or "dies" or stays as it is based on the status of the eight surrounding cells. 
 
@@ -23,32 +21,34 @@ cd conway
 make install
 ```
 
-## Uninstall
-```
-cd conway
-make uninstall
-```
 
 ## Usage
+
+```
+usage: conway [ARG]
+
+Conway takes one or no arguments.
+
+Allowed arguments:
+	file.rle	read a pattern in from a pattern file
+	--random	run the algorithm with a random placement of cells
+	--help	    output this message
+
+if argument is not supplied, read from standard input
+
+```
+
 For quick usage simply run  
 ```
-conway		# randomly place living cells and size grid according to terminal size
+conway --random     # sets a starting grid with randomly places living cells
 ```
+To use a pattern file, just include the `path/to/file.rle` as the argument
 ```
-conway [ -u, -p <pattern>, -f <file.rle> ]
+conway pattern_sheets/gun.rle   # there are a couple RLE files supplied in the repo
 ```
+However, there are [thousands of RLE files out there](https://copy.sh/life/examples/) to use. You don't need to download them, you can just `curl` and pipe the files into `conway`. 
 ```
-conway -p built-in-pattern		# use one of the built in patterns
-conway -f path/to/file.rle		# use a run length encoded pattern file
-conway -u				# show usage
+curl -s https://copy.sh/life/examples/rats.rle | conway
 ```
-## Patterns
-
-There are thousands of [Life starting patterns](https://www.conwaylife.com/wiki/Category:Patterns) that are easy to find on the internet. Using the `.rle` file format is the easiest way to read in patterns in this program. If you click the link you'll be able to find `.rle` files of pretty much every pattern out there. This repo also has 3 pattern `.rle` files to try out. 
-
-Using the built-in patterns is an option too. Using the `-u` flag will list the current built-in patterns. And you can easily add your own too, however, this option will probably removed soon since it's easier and simpler to read from pattern files.
-
-## ToDo
-- add tests
-- remove built-in patterns and rely on `.rle` files
-- add feature to read from `stdin` so you can `curl` web hosted files into program.
+### note:
+I haven't tested every available pattern so I can't guarantee they all work correctly. If you try out a pattern that causes a problem, open an issue. Or if you find an issue and want to contribute, I encourage you to open a pull request.
