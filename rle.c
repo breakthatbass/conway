@@ -20,13 +20,6 @@ void rle_parse(char *s, struct rle_file *f)
     char buf[BUF];
     int IGNORE = 0;
 
-    /*
-    if (s[0] != '#' && s[1] != 'N') {
-        fprintf(stderr, "conway: rle_parse: not a valid RLE pattern file\n");
-        exit(EXIT_FAILURE);
-    }
-    */
-
     while (*s) {
         
         if (*s == '#') { // in a comment line
@@ -40,7 +33,7 @@ void rle_parse(char *s, struct rle_file *f)
 			// conway uses a square grid so we take the largest of h and w
             if (h > w) f->size = h;
             else f->size = w;
-            memset(buf, 0, 1024);
+            memset(buf, 0, BUF);
 
 			// copy the rle directions
             strcpy(buf, strtok(NULL, "!"));
@@ -117,15 +110,16 @@ void load_grid(int **g, char *pattern, int size)
 {
     char *line;
     char *p;
-    int col = size/3; // add an edge buffer
+    int col = 1; // add an edge buffer
 
     int row = size/3;
 
     line = strtok(pattern, "$");
     while (line != NULL) {
-        col = size/3;
+        col = 1;
         p = rle_decode(line);
         for (int i = 0; i < strlen(p); i++) {
+            if (col >= size) col = 1;
             if (p[i] == 'o') g[row][col++] = 1;
             else col++;
         }

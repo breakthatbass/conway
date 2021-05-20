@@ -34,19 +34,20 @@ int main(int argc, char **argv)
         strcpy(buf, rle_string(fp));
 
     } else if (argc == 2) {
+        printf("%s\n", argv[1]);
 
         if (strcmp(argv[1], "--help") == 0) {
             print_usage();
             exit(EXIT_SUCCESS);
 
         /* RLE FILE */
-        } else if (strstr(argv[1], ".rle") == 0) {
+        } else if (strstr(argv[1], ".rle")) {
             fp = fopen(argv[1], "r");
             if (fp == NULL) {
                 fprintf(stderr, "conway: not a valid RLE pattern file\n");
                 exit(EXIT_FAILURE);
             }
-            strcpy(buf, rle_string(stdin));
+            strcpy(buf, rle_string(fp));
             fclose(fp);
 
         /* RANDOM PATTERN */
@@ -56,6 +57,9 @@ int main(int argc, char **argv)
             print_grid(grid, size);
             life(grid, size);
             exit(EXIT_SUCCESS);
+        } else {
+            print_usage();
+            exit(EXIT_FAILURE);
         }
     
     } else {
