@@ -34,7 +34,6 @@ int main(int argc, char **argv)
         strcpy(buf, rle_string(fp));
 
     } else if (argc == 2) {
-        printf("%s\n", argv[1]);
 
         if (strcmp(argv[1], "--help") == 0) {
             print_usage();
