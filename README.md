@@ -3,7 +3,7 @@ This is a visualization program of John Conway's [game of life](https://en.wikip
 
 [![asciicast](https://asciinema.org/a/P2yzKujJdGBl7elAVQzrjDI1T.svg)](https://asciinema.org/a/P2yzKujJdGBl7elAVQzrjDI1T)
 
-The algorithm is a [celluar automation](https://en.wikipedia.org/wiki/Cellular_automaton) where each cell in the grid either comes to "life" or "dies" or stays as it is based on the status of the eight surrounding cells. 
+The algorithm is a [cellular automation](https://en.wikipedia.org/wiki/Cellular_automaton) where each cell in the grid either comes to "life" or "dies" or stays as it is based on the status of the eight surrounding cells. 
 
 The rules:  
 1. a living cell with 2 or 3 living neighbors stays alive.
