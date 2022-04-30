@@ -1,5 +1,5 @@
 CC=gcc
-CFLAGS=-fsanitize=address -Wall -g
+CFLAGS=-Wall
 FILES=main.c grid.c conway.c rle.c
 BIN=conway
 # get the os
