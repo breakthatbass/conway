@@ -1,7 +1,7 @@
 # Conway's Game of Life
 This is a visualization program of John Conway's [game of life](https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life) algorithm that reads from [RLE pattern files](https://www.conwaylife.com/wiki/Run_Length_Encoded).
 
-[![asciicast](https://asciinema.org/a/P2yzKujJdGBl7elAVQzrjDI1T.svg)](https://asciinema.org/a/P2yzKujJdGBl7elAVQzrjDI1T)
+[![asciicast](https://asciinema.org/a/cewZvySnRu83bsUOxf9xisA4y.svg)](https://asciinema.org/a/cewZvySnRu83bsUOxf9xisA4y)
 
 The algorithm is a [cellular automation](https://en.wikipedia.org/wiki/Cellular_automaton) where each cell in the grid either comes to "life" or "dies" or stays as it is based on the status of the eight surrounding cells. 
 
